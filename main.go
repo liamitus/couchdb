@@ -16,20 +16,12 @@ type Database struct {
 // Will panic if the database is not running or not reachable.
 func Open(url string, msgs ...string) Database {
 	db := Database{url}
-	failure := fmt.Sprintf("Could not create database at %q", url)
-	success := fmt.Sprintf("Database found at %q", url)
-	if len(msgs) > 0 {
-		failure = msgs[0]
-	}
-	if len(msgs) > 1 {
-		success = msgs[1]
-	}
 	// Panic if the database is not running.
 	if !db.exists("") {
 		panic(fmt.Sprintf("DB is not running at %q", db.Url))
 	}
 	// Otherwise create the table does not exist.
-	if !db.exists(url, failure, success) {
+	if !db.exists(url, msgs...) {
 		db.Put("", nil)
 	}
 	return db
