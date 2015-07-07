@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 // The database itself.
@@ -13,15 +14,10 @@ type Database struct {
 
 // Constructor for a new Database.
 // Accepts optional failure and success messages (in that order).
-// Will panic if the database is not running or not reachable.
 func Open(url string, msgs ...string) Database {
 	db := Database{url}
-	// Panic if the database is not running.
-	if !db.exists("") {
-		panic(fmt.Sprintf("DB is not running at %q", db.Url))
-	}
 	// Otherwise create the table does not exist.
-	if !db.exists(url, msgs...) {
+	if !db.exists("", msgs...) {
 		db.Put("", nil)
 	}
 	return db
@@ -61,7 +57,9 @@ func (d *Database) exists(url string, msgs ...string) bool {
 			fmt.Println(msgs[0])
 		}
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println(fmt.Sprintf(
+				"Database is not running/unreachable at %q", d.Url))
+			os.Exit(0)
 		}
 		return false
 	}
