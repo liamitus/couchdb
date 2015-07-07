@@ -1,13 +1,16 @@
 # couchdb
-Lightweight CouchDB interface in [go lang](https://golang.org/).
+Lightweight CouchDB interface for [go lang](https://golang.org/).
 
-![Couch DB rocks!][couchdb logo] ![Go rocks too!][golang logo]
+![alt text][couchdb logo] ![alt text][golang logo]
 
 Go get the library `go get https://github.com/liamitus/couchdb` and you're good to go:
+-------------------------------------------------------------------------------
 
 ```golang
 import (
+    "encoding/json"
     "fmt"
+    "io/ioutil"
 
     "github.com/liamitus/couchdb"
 )
@@ -57,5 +60,5 @@ if err != nil {
 fmt.Println(resp)
 ```
 
-[couchdb logo]: http://couchdb.apache.org/image/couch.png
-[golang logo]: https://golang.org/doc/gopher/frontpage.png
+[couchdb logo]: http://couchdb.apache.org/image/couch.png "Couch DB rocks!"
+[golang logo]: https://golang.org/doc/gopher/frontpage.png "Go rocks too!"
