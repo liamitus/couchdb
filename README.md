@@ -3,10 +3,13 @@ Lightweight CouchDB interface for [go lang](https://golang.org/).
 
 ![alt text][couchdb logo] ![alt text][golang logo]
 
-Go get the library `go get https://github.com/liamitus/couchdb` and you're good to go:
--------------------------------------------------------------------------------
+####Go get the library
 
-```golang
+    go get https://github.com/liamitus/couchdb
+
+####and you're good to go:
+
+```go
 import (
     "encoding/json"
     "fmt"
