@@ -41,7 +41,13 @@ func (d *Database) Delete(path string, data []byte) (*http.Response, error) {
 // Simplifies making a request to the database into a single function call.
 func (d *Database) query(requestType string, path string, data []byte) (*http.Response, error) {
 	url := fmt.Sprintf("%s/%s", d.Url, path)
-	req, err := http.NewRequest(requestType, url, bytes.NewBuffer(data))
+	var req *http.Request
+	var err error
+	if data == nil {
+		req, err = http.NewRequest(requestType, url, nil)
+	} else {
+		req, err = http.NewRequest(requestType, url, bytes.NewBuffer(data))
+	}
 	if err != nil {
 		return nil, err
 	}
